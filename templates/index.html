@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ClipFetch — Video & Audio Downloader</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="/"><span class="brand-icon">▶</span><span>ClipFetch</span></a>
+      <span class="top-note"><i></i> Simple video & audio downloader</span>
+    </header>
+
+    <section class="hero">
+      <div class="eyebrow">POWERED BY yt-dlp</div>
+      <h1>Save the video.<br><span>Keep every audio track.</span></h1>
+      <p class="sub">Paste a YouTube link and choose what you want to download.</p>
+
+      <div class="url-card">
+        <label for="url">VIDEO URL</label>
+        <div class="url-row">
+          <input id="url" type="url" placeholder="https://www.youtube.com/watch?v=..." autocomplete="off">
+          <button id="inspectBtn" class="primary">Check video <span>→</span></button>
+        </div>
+        <div class="hint">YouTube video links only · Single videos, not playlists</div>
+      </div>
+    </section>
+
+    <section id="videoCard" class="video-card hidden">
+      <div class="video-info">
+        <img id="thumb" alt="Video thumbnail">
+        <div class="video-meta">
+          <div class="eyebrow">VIDEO FOUND</div>
+          <h2 id="videoTitle"></h2>
+          <p id="videoDetails"></p>
+        </div>
+      </div>
+      <div class="mix">
+        <div class="mix-head"><span class="option-icon">⎇</span><span><b>Custom mix</b><small>Pick a video quality and an audio track, then merge them into one file</small></span></div>
+        <div class="mix-grid">
+          <label>VIDEO QUALITY<select id="videoSelect"></select></label>
+          <label>AUDIO TRACK<select id="audioSelect"></select></label>
+          <label>OUTPUT FORMAT<select id="containerSelect"><option value="mp4">MP4 (most compatible)</option><option value="mkv">MKV (no audio conversion)</option></select></label>
+        </div>
+        <div class="mix-foot"><span id="mixEstimate"></span><button id="mixBtn" class="primary" disabled>Mix &amp; download <span>↓</span></button></div>
+      </div>
+      <div class="divider"><span>or quick download</span></div>
+      <div class="download-options">
+        <button class="option" data-mode="video">
+          <span class="option-icon">▣</span>
+          <span><b>Video</b><small>Best available quality · MP4 when merge is possible</small></span>
+          <strong>↓</strong>
+        </button>
+        <button class="option" data-mode="mp3">
+          <span class="option-icon">♫</span>
+          <span><b>Audio only</b><small>Extract best audio · MP3 192 kbps</small></span>
+          <strong>↓</strong>
+        </button>
+        <button class="option featured" data-mode="all_audio">
+          <span class="option-icon">≋</span>
+          <span><b>All audio tracks</b><small id="audioSummary">Download each exposed audio track into one ZIP</small></span>
+          <strong>↓</strong>
+        </button>
+      </div>
+      <p class="track-note" id="trackNote"></p>
+    </section>
+
+    <section id="progressCard" class="progress-card hidden">
+      <div class="progress-head"><b id="progressTitle">Preparing download</b><span id="progressPct">0%</span></div>
+      <div class="progress-track"><div id="progressBar"></div></div>
+      <p id="progressMessage">Waiting…</p>
+      <a id="downloadBtn" class="download-btn hidden" href="#">Download file <span>↓</span></a>
+      <button id="resetBtn" class="text-btn hidden">Download another video</button>
+    </section>
+
+    <div id="error" class="error hidden" role="alert"></div>
+
+    <section class="how">
+      <div><span>01</span><b>Paste a link</b><small>Enter a YouTube video URL.</small></div>
+      <div><span>02</span><b>Choose a format</b><small>Video, MP3, or all audio tracks.</small></div>
+      <div><span>03</span><b>Save your file</b><small>Wait for processing, then download.</small></div>
+    </section>
+    <footer>Use only for content you own or are authorized to download. Respect copyright and the platform’s terms. Files are deleted from the server once your download completes.</footer>
+  </main>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

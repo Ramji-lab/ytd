@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: clipfetch-ytdlp
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: DOWNLOAD_DIR
+        value: /tmp/clipfetch-downloads
+      - key: MAX_ACTIVE_JOBS
+        value: "1"
